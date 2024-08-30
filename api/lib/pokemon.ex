@@ -10,6 +10,7 @@ defmodule Pokemon do
     end
     defp make_url(url, []), do: url
     defp make_url(url, [head | tail]), do: make_url(url<>head<>"/", tail )
-    defp get_body({:ok, %HTTPoison.Response{ status_code: 200, body: b}}), do: b
-    defp get_body({:error, b}), do: {{:error, b} }
+    defp get_body({:ok, %HTTPoison.Response{ status_code: 200, body: b}}), do: {:ok,  b}
+    defp get_body({:ok, %HTTPoison.Response{ status_code: _}}), do: {:error, "Error"}
+    defp get_body({:error, b}), do: {:error, b}
 end
